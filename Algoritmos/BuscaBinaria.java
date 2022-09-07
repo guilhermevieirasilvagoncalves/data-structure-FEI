@@ -45,10 +45,10 @@ public class BuscaBinaria{
         }
         int pivo = (i+f)/2;
         if(elemento < v[pivo]){
-            return buscaBinaria(v, elemento, pivo-1, f);
+            return buscaBinaria(v, elemento, i, pivo - 1);
         }
         else if(elemento > v[pivo]){
-            return buscaBinaria(v, elemento, pivo-1, f);
+            return buscaBinaria(v, elemento, pivo + 1, f);
         }
         else return pivo;
     }
