@@ -6,11 +6,9 @@
 class No {
     public int valor;
     public No proximo;
-    public No primeiro;
-    public No ultimo;
+    public No topo;
     public No(int valor){
       this.valor = valor;
-      this.primeiro = null;
     }
 
     public int getValor(){
@@ -19,11 +17,9 @@ class No {
 
 }
 
-class FilaDinamicaEncadeada{
-    private No primeiro = null;
-    private No ultimo = null;
+class PilhaDinamicaEncadeada{
+    private No topo = null;
     private int n = 0;
-
 
     public int getN() {
         return this.n;
@@ -33,31 +29,27 @@ class FilaDinamicaEncadeada{
         this.n = n;
     }
 
-    public boolean enfileira(int valor){
+
+    public boolean empilha(int valor){
         No novo = new No(valor);
-        if(ultimo != null){
-            ultimo.proximo = novo;
-        }
-        else{
-            primeiro = novo;
-        }
-        ultimo = novo;
+        novo.proximo = topo;
+        topo = novo;
         n++;  
         return true;
 
     }
 
-    public boolean desinfileira() {
-        if(primeiro != null){
-            primeiro = primeiro.proximo;
-        }
+    public No desempilha() {
+        No temp = topo;
+        topo = topo.proximo;
         System.gc();
         n--;
-        return true;
+        return temp;
+        
     }
 
     public void imprime() {
-        No atual = primeiro;
+        No atual = topo;
         while(atual != null) {
             System.out.println(atual.valor);
             atual = atual.proximo;
@@ -66,17 +58,18 @@ class FilaDinamicaEncadeada{
 }
 
 
-public class FDE {
+public class PDE {
     public static void main(String args[ ]){
-        FilaDinamicaEncadeada L = new FilaDinamicaEncadeada();
-        L.enfileira(3);
-        L.enfileira(4);
-        L.enfileira(2);
+        PilhaDinamicaEncadeada L = new PilhaDinamicaEncadeada();
+        L.empilha(3);
+        L.empilha(4);
+        L.empilha(2);
         L.imprime();
         System.out.println("---------------------");
-        L.desinfileira();
-        L.desinfileira();
+        L.desempilha();
+        L.desempilha();
         L.imprime();
 
     }
 }
+
